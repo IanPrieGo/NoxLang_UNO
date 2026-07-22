@@ -45,10 +45,12 @@ Expresion::
         Primaria | ("!" | "-")Negacion;
 
     Primaria:: 
-        NUMERO | "verdadero" | "falso" | CADENA | "nulo" | "(" Expresion ")" | INDETIFICADORES;
+        NUMERO | "verdadero" | "falso" | CADENA | "nulo" | "(" Expresion ")" | IDENTIFICADOR;
 
 Declaracion:: 
     "Imprime" (Expresion) |
+    "Let" IDENTIFICADOR "=" Expresion |
+    IDENTIFICADOR "=" Expresion
     "Si" "(" Expresion ")" "{" CODIGO "}" 
     {"Sino" "Si" "(" Expresion ")" "{" CODIGO "}"} 
     {"Sino" "(" Expresion ")" "{" CODIGO "}"} |

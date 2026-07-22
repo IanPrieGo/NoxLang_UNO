@@ -4,10 +4,30 @@ export const MULTIPLY = "*";
 export const DIVIDE = "/";
 
 export const EQUAL = "=";
+export const NOT = "!";
+
+export const LLAVEABIERTA = "{";
+export const LLAVECERRADA = "}";
+
+export const COMILLASDOBLES = "\"";
+export const COMILLASSIMPLES = "\'";
+
+export const EQUALEQUAL = "==";
+export const GREATEREQUAL = ">=";
+export const LESSEREQUAL = "<=";
+export const NOTEQUAL = "!=";
+export const GREATERTHAN = ">";
+export const LESSTHAN = "<";
+
+
 export const IDENTIFIER = "id";
-export const LET = "let";
-export const PRINT = "imprime";
-export const NEW_LINE = "New-Line";
+
+export const LET = "Let";
+export const SI = "Si";
+export const SINO = "Sino";
+export const IMPRIME = "Imprime";
+export const MIENTRAS = "Mientras";
+export const PARA = "Para";
 
 export const ZERO = "0";
 export const ONE = "1";
@@ -25,3 +45,4 @@ export const LITERAL = "Literal";
 export const OPERATOR = "Operator";
 
 export const EOF =  "End-Of-File";
+export const NEW_LINE = "New-Line";
