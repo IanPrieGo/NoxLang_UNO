@@ -27,11 +27,7 @@ class Negacion {
 }
 
 class Primaria {
-
-}
-
-class Declaracion {
-    
+   
 }
 
 class Asignacion{}
