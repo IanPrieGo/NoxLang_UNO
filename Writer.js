@@ -1,7 +1,7 @@
 import fs from "node:fs";
 
 
-export class Writer{
+export class Emitter{
     constructor(){
 
     }
