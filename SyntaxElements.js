@@ -33,3 +33,12 @@ class Primaria {
 class Declaracion {
     
 }
+
+class Asignacion{}
+class Creacion{}
+class Ciclo{}
+class Condicional{}
+class Impresion{}
+class Metodo{}
+class Operacion{}
+class Acceso{}
