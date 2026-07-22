@@ -1,0 +1,87 @@
+programa:: 
+    {linea};
+
+linea:: 
+    (statement | expresion) "newLine";
+
+declaracion:: 
+    "imprime" (expresion | string) "newLine" |
+    "let" IDENTIFIER "=" (expresion | IDENTIFIER) "newLine" |
+    IDENTIFIER "=" (expresion | IDENTIFIER) "newLine";
+
+expresion:: 
+    sum-res;
+
+sum-res:: 
+    div-mul {("+" | "-") div-mul} "newLine";
+
+div-mul:: 
+    NUMERO {("/" | "*") NUMERO} "newLine" ;
+
+--------
+
+Programa:: 
+    {Linea};
+
+Linea:: 
+    (Declaracion | Expresion) "newLine";
+
+Expresion::
+    Igualdad;
+        
+    Igualdad::
+        Diferenciacion { ("!=" | "==") Diferenciacion};
+
+    Diferenciacion::
+        SumRes { ("<"  | "<=" | ">" | ">=") SumRes};
+
+    SumRes::
+        DivMul { ("+" | "-") DivMul };
+
+    DivMul::
+        Negacion { ("*" | "/") Negacion };
+
+    Negacion::
+        Primaria | ("!" | "-")Negacion;
+
+    Primaria:: 
+        NUMERO | "verdadero" | "falso" | CADENA | "nulo" | "(" Expresion ")" | INDETIFICADORES;
+
+Declaracion:: 
+    "Imprime" (Expresion) |
+    "Si" "(" Expresion ")" "{" CODIGO "}" 
+    {"Sino" "Si" "(" Expresion ")" "{" CODIGO "}"} 
+    {"Sino" "(" Expresion ")" "{" CODIGO "}"} |
+    "Mientras"  "(" Expresion ")" "{" CODIGO "}";
+
+Palabras Clave::
+    "Si" | "Sino" | "Imprime" | "Mientras" | "Para";
+
+
+
+< {} >
+El contenido entre los Corchetes se repite 0 o mas veces
+
+< | >
+El contenido a los lados de la Barra Vertical...
+
+< "" >
+El contenido entre comillas es un terminal
+
+< :: >
+Previo a este, esta el nombre de la regla, y despues su definicion
+
+< ; >
+Fin de una regla
+
+
+
+
+
+# Desintegracion de numeros grandes en texto
+# para Reconstruirlos luego en from de entero
+8962
+962
+62
+2
+8000 + 900 + 60 + 2;

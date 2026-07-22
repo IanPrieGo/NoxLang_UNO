@@ -72,4 +72,12 @@ export class Lexer {
         return this.source[this.charIndex];
     }
 
+    isAlpha(){
+        return 
+    }
+
+    isNumeric(){
+
+    }
+
 }

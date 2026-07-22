@@ -17,11 +17,23 @@ export class Parser {
         this.tokenList = tokens;
         console.log("Program: ");
 
-        let expresion = this.sumaResta();
+        let lines = [];
 
-        console.log(expresion.toString())
+        while (!this.match(this.currentToken(), [TokenType.EOF])){
 
-        this.result = expresion;
+            lines.push();
+
+        }
+
+        console.log(lines.toString())
+
+        this.result = lines;
+
+    }
+    
+    linea(){
+
+        retu
 
     }
 
