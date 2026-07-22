@@ -1,4 +1,4 @@
-class Linea {
+class Comando {
 
 }
 
