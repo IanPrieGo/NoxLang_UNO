@@ -39,6 +39,10 @@ export class Lexer {
                     this.tokens.push(new Operator(TokenTypes.DIVIDE));
                 break;
 
+                case "=":
+                    this.tokens.push(new Token(TokenTypes.EQUAL, null));
+                break;
+
                 case ";":
                     this.tokens.push(new Statement(TokenTypes.NEW_LINE));
                 break;
