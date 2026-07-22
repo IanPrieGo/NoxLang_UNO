@@ -17,6 +17,12 @@ export class Statement extends Token{
     }
 }
 
+export class Identifier extends Token{
+    constructor(type){
+        super(type, null);
+    }
+}
+
 export class Operator extends Token{
     constructor(type){
         super(type, null);

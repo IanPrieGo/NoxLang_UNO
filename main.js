@@ -1,7 +1,7 @@
 import * as TokenTypes from "./TokenTypes.js";
 import {Lexer} from "./Lexer.js";
 import {Parser} from "./Parser.js";
-import {Writer} from "./Writer.js";
+import {Emitter} from "./Emitter.js";
 import fs from 'node:fs';
 import process from "node:process";
 
@@ -15,9 +15,9 @@ for (let char of source){
 
 let lexer = new Lexer();
 let parser = new Parser();
-let writer = new Writer();
+let writer = new Emitter();
 
 lexer.process(source);
-parser.parseProgram(lexer.tokens);
+// parser.parseProgram(lexer.tokens);
 
-writer.createJavaFile('./MAIN.java', parser.result.toString());
+// writer.createJavaFile('./MAIN.java', parser.result.toString());

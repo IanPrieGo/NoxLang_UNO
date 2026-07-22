@@ -1,5 +1,5 @@
 import * as TokenTypes from "./TokenTypes.js";
-import {Token, Statement, Operator, Literal} from "./Token.js";
+import {Token, Statement, Operator, Literal, Identifier} from "./Token.js";
 import process from "node:process";
 
 export class Lexer {
@@ -48,8 +48,48 @@ export class Lexer {
                 break;
                 
                 default:
-                if (this.currentChar() <= "9" && this.currentChar() >= "0") {
-                    this.tokens.push(new Literal(this.currentChar()));
+                if (this.isNumeric(this.currentChar())) {
+                    let num =  this.currentChar();
+                    while(this.isNumeric(this.nextChar())){
+                        this.charIndex++;
+                        num += this.currentChar();
+                    }
+                    this.tokens.push(new Literal(num));
+
+                } else if(this.isAlpha(this.currentChar())){
+                    let word =  this.currentChar();
+                    while(this.isAlpha(this.nextChar())){
+                        this.charIndex++;
+                        word += this.currentChar();
+                    }
+
+                    switch(word){
+                        case TokenTypes.IMPRIME:
+                            this.tokens.push(new Statement(TokenTypes.IMPRIME));
+                        break;
+
+                        case TokenTypes.MIENTRAS:
+                            this.tokens.push(new Statement(TokenTypes.MIENTRAS));
+                        break;
+
+                        case TokenTypes.LET:
+                            this.tokens.push(new Statement(TokenTypes.LET));
+                        break;
+
+                        case TokenTypes.SI:
+                            this.tokens.push(new Statement(TokenTypes.SI));
+                        break;
+
+                        case TokenTypes.SINO:
+                            this.tokens.push(new Statement(TokenTypes.SINO));
+                        break;
+                        
+                        default:
+                            this.tokens.push(new Identifier(word, null));
+                        break;
+                    }
+                    
+
                 } else if (this.currentChar() === undefined){
                     //Just Exit The Loop
                 } else {
@@ -76,11 +116,15 @@ export class Lexer {
         return this.source[this.charIndex];
     }
 
-    isAlpha(){
-        return 
+    isAlpha(char){
+        return char <= "z" && char >= "a" | char <= "Z" && char >= "A";
     }
 
-    isNumeric(){
+    isNumeric(char){
+        return char <= "9" && char >= "0";
+    }
+
+    checkForKeyWords(){
 
     }
 
