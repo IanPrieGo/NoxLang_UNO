@@ -1,5 +1,6 @@
 import * as TokenType from "./TokenTypes.js";
 import * as Exp from "./Expresion.js";
+import * as Syntax  from "./SyntaxElements.js";
 import process from "node:process";
 
 export class Parser {
@@ -8,6 +9,7 @@ export class Parser {
         this.tokenList = tokens;
         this.stopParsing = false;
         this.hadError = false;
+        this.declaredVariables = [];
 
         this.result;
 
@@ -17,24 +19,107 @@ export class Parser {
         this.tokenList = tokens;
         console.log("Program: ");
 
-        let lines = [];
+        let commands = [];
 
         while (!this.match(this.currentToken(), [TokenType.EOF])){
 
-            lines.push();
+            let currentCommand = this.command();
+
+            if (currentCommand != undefined) {
+                commands.push(currentCommand);
+            }
 
         }
 
-        console.log(lines.toString())
+        console.log("COMANDOS:");
+        console.log(commands);
 
-        this.result = lines;
+        this.result = commands;
 
     }
     
-    linea(){
+    command(){
 
-        retu
+        let comando;
 
+        switch (this.currentToken().type){
+
+            case TokenType.LET:
+                comando = this.creacion();
+            break;
+
+            case  TokenType.IMPRIME:
+            break;
+
+            default:
+            break;
+
+        }
+
+        this.advanceIndex(1);
+
+        return comando;
+
+    }
+
+    asignacion(){
+        console.log("Asignacion: ");
+
+        let variableName;
+        let variableValue;
+
+        this.advanceIndex(1);
+        if (this.currentToken().type != TokenType.LITERAL){
+            this.abort("Expecting Literal  ", 1);
+        }
+
+        variableValue = this.currentToken().value;
+
+        this.advanceIndex(1);
+        if (this.currentToken().type != TokenType.EOC){
+            this.abort("Expecting \" ; \"", 1);
+        }
+
+        
+
+        return new Syntax.Asignacion(variableName, variableValue);
+    }
+    
+    creacion(){
+        let asignValue = false;
+        let variableName;
+        let variableValue = null;
+
+        this.advanceIndex(1);
+        if (this.currentToken().type != TokenType.IDENTIFIER){
+            this.abort("Expecting Identifier ", 1);
+        }
+
+        variableName = this.currentToken().value;
+
+        for (let variable of this.declaredVariables){
+            if (variable[0] == variableName){
+                this.abort("Variable \"" + variable[0] +"\" Already Declared ", 1);
+            };
+        }
+        console.log("Variable  \"" + variableName +"\" added to Declared variables list");
+
+        this.advanceIndex(1);
+
+        if (this.currentToken().type == "="){
+            this.advanceIndex(1);
+            variableValue = this.currentToken().value;
+            this.advanceIndex(1);
+        } 
+    
+
+        if (this.currentToken().type != TokenType.EOC){
+            this.abort("Expecting \" ; \"", 1);
+        }
+
+
+        this.declaredVariables.push([variableName, variableValue]);
+        return new Syntax.Creacion(variableName, variableValue);
     }
 
     sumaResta(){
@@ -69,9 +154,9 @@ export class Parser {
 
     }
 
-    match(suspect, typesToCheck){
+    match(token, typesToCheck){
         for (let type of typesToCheck){
-            if(suspect.type == type)
+            if(token.type == type)
             return true;
         }
         return false;
@@ -87,6 +172,10 @@ export class Parser {
 
     currentToken(){
         return this.tokenList[this.tokenIndex];
+    }
+
+    abort(mes, errCode){
+        console.error("ParsingError. " + mes); process.exit(errCode);
     }
 
 }

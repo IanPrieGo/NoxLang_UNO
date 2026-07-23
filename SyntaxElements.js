@@ -1,40 +1,54 @@
-class Comando {
+export class Comando {
+
+    constructor(comando){
+        this.comando =  comando;
+    }
 
 }
 
-class Expresion {
+export class Expresion {
 
 }
 
-class Igualdad {
+export class Igualdad {
 
 }
 
-class Diferenciacion {
+export class Diferenciacion {
 
 }
 
-class SumRes {
+export class SumRes {
 
 }
 
-class DivMul {
+export class DivMul {
     
 }
 
-class Negacion {
+export class Negacion {
 
 }
 
-class Primaria {
+export class Primaria {
    
 }
 
-class Asignacion{}
-class Creacion{}
-class Ciclo{}
-class Condicional{}
-class Impresion{}
-class Metodo{}
-class Operacion{}
-class Acceso{}
+export class Asignacion{
+    constructor(name, value){
+        this.name = name;
+        this.value = value;
+    }
+}
+export class Creacion{
+    constructor(name, value){
+        this.name = name;
+        this.value = value;
+    }
+}
+export class Ciclo{}
+export class Condicional{}
+export class Impresion{}
+export class Metodo{}
+export class Operacion{}
+export class Acceso{}

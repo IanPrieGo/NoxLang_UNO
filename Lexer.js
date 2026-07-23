@@ -44,7 +44,7 @@ export class Lexer {
                 break;
 
                 case ";":
-                    this.tokens.push(new Statement(TokenTypes.NEW_LINE));
+                    this.tokens.push(new Statement(TokenTypes.EOC));
                 break;
                 
                 default:
@@ -54,7 +54,7 @@ export class Lexer {
                         this.charIndex++;
                         num += this.currentChar();
                     }
-                    this.tokens.push(new Literal(num));
+                    this.tokens.push(new Literal(TokenTypes.LITERAL, num));
 
                 } else if(this.isAlpha(this.currentChar())){
                     let word =  this.currentChar();
@@ -85,7 +85,7 @@ export class Lexer {
                         break;
                         
                         default:
-                            this.tokens.push(new Identifier(word, null));
+                            this.tokens.push(new Identifier(TokenTypes.IDENTIFIER, word));
                         break;
                     }
                     

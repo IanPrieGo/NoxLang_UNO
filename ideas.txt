@@ -1,0 +1,28 @@
+creacion(){}
+
+asignacion(){}
+
+
+Hola, quiero crear una variable.
+
+Asi que llamamos a la function "creacion()"; dentro de esta, 
+analizaremos lo siguiente:
+    Se ecuentran los tokens necesarios en el 
+    orden correcto para crear una variable? (LET, ID, EOC)
+    Sino, lanzamos error;
+    Sisi, proseguimos.
+
+    Ahora que ya sabemos que tenemos los tokens necesarios 
+    para crear una variable, hay una ultima cosa que checar.
+    Esta variable ya ha sido declarada? Para ello, 
+    checamos la lista de varibales declaradas.
+    Si alguna de estas coincide, lanzamos error;
+    Sino, agregamos la variable a la lista, y proseguimos.
+    
+    Ahora, tomaremos el Token Identificador y el 
+    Token de Valor..., un momento. 
+    Aqui solo creamos variables, no asignamos valores...
+    Entonces como sabemos que valor asignarle?
+
+    Opcion A:
+    usamos el metodo "asignar()" y hacemos que este regrese el 

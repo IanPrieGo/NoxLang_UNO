@@ -18,6 +18,6 @@ let parser = new Parser();
 let writer = new Emitter();
 
 lexer.process(source);
-// parser.parseProgram(lexer.tokens);
+parser.parseProgram(lexer.tokens);
 
 // writer.createJavaFile('./MAIN.java', parser.result.toString());

@@ -18,8 +18,8 @@ export class Statement extends Token{
 }
 
 export class Identifier extends Token{
-    constructor(type){
-        super(type, null);
+    constructor(type, name){
+        super(type, name);
     }
 }
 
@@ -30,9 +30,8 @@ export class Operator extends Token{
 }
 
 export class Literal extends Token{
-    constructor(type){
-        let value;
-        switch(type){
+    constructor(type, value){
+        switch(value){
             case TokenTypes.ZERO: value = 0; break;
             case TokenTypes.ONE: value = 1; break;
             case TokenTypes.TWO: value = 2; break;

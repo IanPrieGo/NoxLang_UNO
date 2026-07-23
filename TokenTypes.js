@@ -19,7 +19,6 @@ export const NOTEQUAL = "!=";
 export const GREATERTHAN = ">";
 export const LESSTHAN = "<";
 
-
 export const IDENTIFIER = "id";
 
 export const LET = "Let";
@@ -45,4 +44,4 @@ export const LITERAL = "Literal";
 export const OPERATOR = "Operator";
 
 export const EOF =  "End-Of-File";
-export const NEW_LINE = "New-Line";
+export const EOC = "End-Of-Command";

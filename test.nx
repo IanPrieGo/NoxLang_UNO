@@ -1,2 +1,1 @@
-let a = 8 + 7;
-imprime a;
+Let a = 8 + 7;
