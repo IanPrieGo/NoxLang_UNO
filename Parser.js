@@ -17,7 +17,7 @@ export class Parser {
 
     parseProgram(tokens, holder){
         this.tokenList = tokens;
-        console.log("Program: ");
+        console.log("Programa: ");
 
         let commands = [];
 
@@ -31,8 +31,11 @@ export class Parser {
 
         }
 
-        console.log("COMANDOS:");
+        console.log(" +=> COMANDOS:");
         console.log(commands);
+
+        console.log(commands[1]);
+        // console.log(commands[1].value);
 
         this.result = commands;
 
@@ -45,13 +48,22 @@ export class Parser {
         switch (this.currentToken().type){
 
             case TokenType.LET:
+                console.log("Creacion");
                 comando = this.creacion();
             break;
 
             case  TokenType.IMPRIME:
+                console.log("Impresion");
+                comando = this.impresion();
+            break;
+
+            case  TokenType.IDENTIFIER:
+                console.log("Asignacion");
+                comando = this.asignacion();
             break;
 
             default:
+                this.abort("Invalid Command", 1);
             break;
 
         }
@@ -63,17 +75,30 @@ export class Parser {
     }
 
     asignacion(){
-        console.log("Asignacion: ");
-
-        let variableName;
+        let variableName = this.currentToken().value;
         let variableValue;
 
         this.advanceIndex(1);
-        if (this.currentToken().type != TokenType.LITERAL){
+
+        if (this.currentToken() != TokenType.EQUAL){
+            this.abort("Expecting \" = \" ");
+        }
+
+        this.advanceIndex(1);
+
+        if (this.currentToken() == TokenType.IDENTIFIER){
+            for (let variable of this.declaredVariables){
+                if (variable[0] != this.currentToken().value){
+                    this.abort("Se intento una operacion con una variable no declarada", 1)
+                }
+            }
+        } else if (this.currentToken().type != TokenType.LITERAL){
             this.abort("Expecting Literal  ", 1);
         }
 
-        variableValue = this.currentToken().value;
+        console.log(this.currentToken());
+
+        variableValue = this.expresion();
 
         this.advanceIndex(1);
         if (this.currentToken().type != TokenType.EOC){
@@ -120,6 +145,28 @@ export class Parser {
 
         this.declaredVariables.push([variableName, variableValue]);
         return new Syntax.Creacion(variableName, variableValue);
+    }
+
+    impresion(){
+        let valorAImprimir;
+        this.advanceIndex(1);
+
+        console.log(this.currentToken())
+        valorAImprimir = this.expresion();
+        console.log(valorAImprimir);
+
+        if (valorAImprimir == undefined) this.abort("Expecting Expression", 1);
+
+        this.advanceIndex(1);
+        if (this.currentToken().type != TokenType.EOC){
+            this.abort("Expecting \" ; \"", 1);
+        }
+
+        return new Syntax.Impresion(valorAImprimir);
+    }
+
+    expresion(){
+        return this.sumaResta();
     }
 
     sumaResta(){

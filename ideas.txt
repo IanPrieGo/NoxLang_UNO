@@ -21,8 +21,15 @@ analizaremos lo siguiente:
     
     Ahora, tomaremos el Token Identificador y el 
     Token de Valor..., un momento. 
-    Aqui solo creamos variables, no asignamos valores...
-    Entonces como sabemos que valor asignarle?
+    Aqui solo creamos variables, no checamos si habia un 
+    Token de "=", asi que no sabemos que valor asignarle.
 
     Opcion A:
-    usamos el metodo "asignar()" y hacemos que este regrese el 
+    Checar desde el inico si existe un Token "=", si es asi, 
+    ya sabemos que tenemos que asignar un valor al final. 
+    Pero si no, solo le damo el valor de null;
+
+
+
+
+    

@@ -48,7 +48,11 @@ export class Creacion{
 }
 export class Ciclo{}
 export class Condicional{}
-export class Impresion{}
+export class Impresion{
+    constructor(valorAImprimir){
+        this.valorAImprimir = valorAImprimir;
+    }
+}
 export class Metodo{}
 export class Operacion{}
 export class Acceso{}
